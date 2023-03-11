@@ -33,7 +33,8 @@ router.get("/products", async (req, res) => {
 
     if (qNew) {
       products = await Product.find().sort({ createdAt: -1 }).limit(1);
-    } else if (qCategory) {
+    }
+    if (qCategory) {
       numOfProducts = await Product.countDocuments({
         categories: {
           $in: [qCategory],

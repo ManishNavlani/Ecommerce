@@ -39,7 +39,7 @@ function ProductList() {
   const history = useHistory();
   const query = useQuery();
   const queryPage = +query.get("page") || 1;
-  const category = location.pathname.split("/")[2] || "";
+  const category = location.pathname.split("/")[2] || undefined;
   const [currentPage, setCurrentPage] = useState(queryPage);
 
   const skeletonNumArr = [1, 2, 3, 4, 5, 6, 7, 8];

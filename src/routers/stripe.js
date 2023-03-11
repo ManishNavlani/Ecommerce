@@ -2,11 +2,6 @@ const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 const router = new express.Router();
 
-const products = [
-  { id: 1, name: "nisha", price: 20 },
-  { id: 2, name: "manish", price: 20 },
-];
-
 router.post("/payment", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
@@ -32,7 +27,7 @@ router.post("/payment", async (req, res) => {
 
     res.json({ url: session.url, paymentIntent: session.payment_intent });
   } catch (err) {
-    console.log("err 😣", err);
+    console.log(err);
   }
 });
 module.exports = router;

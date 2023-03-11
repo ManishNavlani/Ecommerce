@@ -1,3 +1,4 @@
+const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const adminRouter = require("./routers/admin");
@@ -26,13 +27,15 @@ app.use("/api/v4", stripeRouter);
 app.use("/api/v4", reviewRouter);
 app.use("/api/v4", adminRouter);
 
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static("client/dist"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "dist", "index.html"));
-  });
-}
+app.use(express.static(path.join(__dirname, "../client/dist")));
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "../client/dist/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
 
 const port = process.env.PORT;
 

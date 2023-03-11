@@ -25,8 +25,8 @@ const typeOneCreate = (tagType) => {
 export const productApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://ecomani.herokuapp.com/api/v4/`,
-    // baseUrl: `http://localhost:3000/api/v4/`,
+    // baseUrl: `https://ecomani.herokuapp.com/api/v4/`,
+    baseUrl: `/`,
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().user.userToken;
@@ -44,7 +44,7 @@ export const productApi = createApi({
 
     login: builder.mutation({
       query: (body) => ({
-        url: "users/login",
+        url: "api/v4/users/login",
         method: "POST",
         body,
       }),
@@ -54,7 +54,7 @@ export const productApi = createApi({
     // User Register
     register: builder.mutation({
       query: (body) => ({
-        url: "users/register",
+        url: "api/v4/users/register",
         method: "POST",
         body,
       }),
@@ -64,7 +64,7 @@ export const productApi = createApi({
     // User Logout
     logout: builder.mutation({
       query: () => ({
-        url: "users/logout",
+        url: "api/v4/users/logout",
         method: "POST",
       }),
       invalidatesTags: (result, error, arg) =>
@@ -73,7 +73,7 @@ export const productApi = createApi({
 
     updateUser: builder.mutation({
       query: (body) => ({
-        url: "users/me",
+        url: "api/v4/users/me",
         method: "PATCH",
         body,
       }),
@@ -82,7 +82,7 @@ export const productApi = createApi({
     }),
 
     userProfile: builder.query({
-      query: () => `users/me`,
+      query: () => `api/v4/users/me`,
       providesTags: (result, error, arg) => typeOneQuery("Users", result._id),
     }),
     //Products
@@ -90,8 +90,8 @@ export const productApi = createApi({
     getAllProducts: builder.query({
       query: ({ category, currentPage }) =>
         category
-          ? `products?category=${category}&page=${currentPage}`
-          : `products?page=${currentPage}`,
+          ? `api/v4/products?category=${category}&page=${currentPage}`
+          : `api/v4/products?page=${currentPage}`,
       providesTags: (result, error, arg) =>
         typeAllQuery(result.products, "Products"),
     }),
@@ -100,14 +100,14 @@ export const productApi = createApi({
 
     //get product by id                      {P-R}
     getProductById: builder.query({
-      query: (id) => `products/${id}`,
+      query: (id) => `api/v4/products/${id}`,
       providesTags: (result, error, id) => typeOneQuery("Products", id),
     }),
 
     searchProduct: builder.query({
       query({ queryStr, page }) {
         return {
-          url: `product/search?search=${queryStr}&page=${page}`,
+          url: `api/v4/product/search?search=${queryStr}&page=${page}`,
         };
       },
       providesTags: (result, error, arg) =>
@@ -118,7 +118,7 @@ export const productApi = createApi({
     createOrder: builder.mutation({
       query(body) {
         return {
-          url: `orders/new-order`,
+          url: `api/v4/orders/new-order`,
           method: "POST",
           body,
         };
@@ -127,14 +127,14 @@ export const productApi = createApi({
     }),
 
     getUserOrders: builder.query({
-      query: () => `orders/order`,
+      query: () => `api/v4/orders/order`,
       providesTags: (result, error, arg) => typeAllQuery(result, "Orders"),
     }),
 
     checkOut: builder.mutation({
       query(body) {
         return {
-          url: `payment`,
+          url: `api/v4/payment`,
           method: "POST",
           body,
         };
@@ -143,14 +143,14 @@ export const productApi = createApi({
 
     //Cart
     getUserCart: builder.query({
-      query: () => `user/cart`,
+      query: () => `api/v4/user/cart`,
       providesTags: (result, error, arg) => typeOneQuery("Carts", result._id),
     }),
 
     createUserCart: builder.mutation({
       query() {
         return {
-          url: `user/cart`,
+          url: `api/v4/user/cart`,
           method: "POST",
         };
       },
@@ -160,7 +160,7 @@ export const productApi = createApi({
     updateUserCart: builder.mutation({
       query(cart) {
         return {
-          url: `user/cart`,
+          url: `api/v4/user/cart`,
           method: "PATCH",
           body: cart,
         };
@@ -175,7 +175,7 @@ export const productApi = createApi({
     postReview: builder.mutation({
       query(body) {
         return {
-          url: `product/new-review`,
+          url: `api/v4/product/new-review`,
           method: "POST",
           body,
         };
@@ -185,14 +185,14 @@ export const productApi = createApi({
 
     // get  all reviews of product  by product's id
     getProductReviews: builder.query({
-      query: (id) => `product/reviews/${id}`,
+      query: (id) => `api/v4/product/reviews/${id}`,
       providesTags: (result, error, arg) =>
         typeAllQuery(result.reviews, "Reviews"),
     }),
 
     //get current user's review about product  by user's id
     getUserReview: builder.query({
-      query: (id) => `product/user/review/${id}`,
+      query: (id) => `api/v4/product/user/review/${id}`,
       providesTags: (result, error, id) => typeOneQuery("Reviews", id),
     }),
 
@@ -200,7 +200,7 @@ export const productApi = createApi({
     updateUserReview: builder.mutation({
       query({ updateReviewBody, productId }) {
         return {
-          url: `product/user/review/${productId}`,
+          url: `api/v4/product/user/review/${productId}`,
           method: "PATCH",
           body: updateReviewBody,
         };
