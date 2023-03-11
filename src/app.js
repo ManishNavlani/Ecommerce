@@ -27,7 +27,8 @@ app.use("/api/v4", stripeRouter);
 app.use("/api/v4", reviewRouter);
 app.use("/api/v4", adminRouter);
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// app.use(express.static(path.join(__dirname, "../client/dist")));
+
 app.get("*", function (_, res) {
   res.sendFile(
     path.join(__dirname, "../client/dist/index.html"),
