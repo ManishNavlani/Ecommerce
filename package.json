@@ -2,10 +2,10 @@
   "name": "e-commerce-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
