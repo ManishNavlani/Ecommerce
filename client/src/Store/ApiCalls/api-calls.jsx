@@ -25,7 +25,6 @@ const typeOneCreate = (tagType) => {
 export const productApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: `https://ecomani.herokuapp.com/api/v4/`,
     baseUrl: `/`,
 
     prepareHeaders: (headers, { getState }) => {
