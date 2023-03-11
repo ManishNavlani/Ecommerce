@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build",
+    "build": "build",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
