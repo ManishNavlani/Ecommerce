@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+mongoose.set("strictQuery", false);
 
 mongoose.connect(process.env.MONGODB_URL, (err) => {
   if (!err) {
