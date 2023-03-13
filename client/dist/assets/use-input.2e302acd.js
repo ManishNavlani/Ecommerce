@@ -1,0 +1,1 @@
+import{r as n}from"./vendor.77d9ddd1.js";const v=u=>{const[e,t]=n.exports.useState(""),[o,r]=n.exports.useState(!1),s=u(e);return{value:e,isValid:s,hasError:!s&&o,valueChangeHandler:a=>{t(a.target.value)},inputBlurHandler:a=>{r(!0)},reset:()=>{t(""),r(!1)}}};export{v as u};
